@@ -1,15 +1,49 @@
-version: '3.8'
-
 services:
   immo-admin-react:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
     command: npm run dev
+    depends_on:
+      - api
+      - db
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: node server.js
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: immo_admin
+      MYSQL_USER: immo_user
+      MYSQL_PASSWORD: immo_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql_data:

@@ -5,6 +5,8 @@ import Properties from "./pages/Properties"
 import Options from "./pages/Options"
 import PropertyForm from "./pages/PropertyForm"
 import OptionForm from "./pages/OptionForm"
+import PropertyList from './components/PropertyList'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,6 +73,21 @@ function Root() {
   </>
 }
 
-export default function App() {
-  return <RouterProvider router={router}></RouterProvider>
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white shadow">
+        <div className="container mx-auto px-4 py-6">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Immo Admin
+          </h1>
+        </div>
+      </header>
+      <main>
+        <RouterProvider router={router}></RouterProvider>
+      </main>
+    </div>
+  )
 }
+
+export default App
