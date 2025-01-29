@@ -1,90 +1,121 @@
-# Immo Admin React
+# Interface d'Administration Immobilier (immo-admin-react)
 
-Application d'administration immobilière développée avec React et Vite.
+Interface d'administration développée avec React pour la gestion immobilière.
 
 ## Description
 
-Cette application permet de gérer les biens immobiliers, les locataires et les propriétaires. Elle est construite avec React et utilise Vite comme outil de build.
+Cette interface d'administration fait partie d'un ensemble de trois projets :
+- API Backend (PHP/Slim 4)
+- Interface d'administration (React) - Ce projet
+- Interface client (Vue.js)
 
-## Prérequis
+## Technologies Utilisées
 
-- Node.js (v18 ou supérieur)
-- Docker et Docker Compose
-- Git
+- React 18+
+- Vite
+- Tailwind CSS
+- Node.js
+- Docker & Docker Compose
+- JWT pour l'authentification
+
+## Fonctionnalités
+
+- Authentification administrateur
+- Gestion des biens immobiliers (CRUD)
+- Upload et gestion des images
+- Interface responsive
+- Tableau de bord administrateur
+- Gestion des utilisateurs
 
 ## Installation
 
-### Installation locale
+### Avec Docker (Recommandé)
 
-1. Cloner le repository
+1. Cloner le dépôt :
 ```bash
 git clone https://github.com/SachaDodane/immo-admin-react.git
 cd immo-admin-react
 ```
 
-2. Installer les dépendances
-```bash
-npm install
-```
-
-3. Créer le fichier .env
+2. Créer le fichier `.env` :
 ```bash
 cp .env.exemple .env
 ```
 
-4. Lancer l'application en mode développement
+3. Configurer les variables d'environnement dans `.env`
+
+4. Lancer les conteneurs Docker :
+```bash
+docker-compose up -d
+```
+
+L'interface sera disponible sur `http://localhost:3000`
+
+### Installation Manuelle
+
+1. Cloner le dépôt
+2. Copier `.env.exemple` vers `.env`
+3. Installer les dépendances :
+```bash
+npm install
+```
+4. Lancer en développement :
 ```bash
 npm run dev
 ```
 
-### Installation avec Docker
+## Variables d'Environnement
 
-1. Cloner le repository
-```bash
-git clone https://github.com/SachaDodane/immo-admin-react.git
-cd immo-admin-react
-```
+Configuration requise dans le fichier `.env` :
 
-2. Construire et démarrer les conteneurs
-```bash
-docker-compose up --build
-```
+- `VITE_API_URL` : URL de l'API backend
+- `VITE_APP_PORT` : Port de l'application (défaut: 3000)
 
-L'application sera accessible à l'adresse : http://localhost:5173
-
-## Structure du projet
+## Structure du Projet
 
 ```
 immo-admin-react/
-├── src/               # Code source de l'application
-├── public/            # Fichiers statiques
-├── docker-compose.yml # Configuration Docker Compose
-├── Dockerfile        # Configuration Docker
-└── README.md         # Documentation
+├── src/
+│   ├── components/     # Composants React réutilisables
+│   ├── pages/         # Pages de l'application
+│   ├── services/      # Services (API, auth, etc.)
+│   ├── store/         # État global de l'application
+│   ├── styles/        # Styles CSS/Tailwind
+│   └── utils/         # Fonctions utilitaires
+├── public/           # Ressources statiques
+└── docker/          # Configuration Docker
 ```
 
-## Workflow Git
+## GitFlow
 
-Ce projet suit les principes de GitFlow :
+Le projet suit la méthodologie GitFlow :
 
-1. La branche principale est `main`
-2. La branche de développement est `develop`
-3. Pour chaque nouvelle fonctionnalité :
-   - Créer une branche `feature/*` depuis `develop`
-   - Développer la fonctionnalité
-   - Créer une Pull Request vers `develop`
+- `main` : Branche de production
+- `develop` : Branche de développement
+- `feature/*` : Branches de fonctionnalités
+- `hotfix/*` : Branches de corrections urgentes
 
-## Technologies utilisées
+### Processus de développement :
+1. Créer une branche feature : `git checkout -b feature/ma-fonctionnalite`
+2. Développer la fonctionnalité
+3. Créer une Pull Request vers `develop`
+4. Après review, merger dans `develop`
 
-- React
-- Vite
-- Tailwind CSS
-- Docker
+## Scripts Disponibles
+
+- `npm run dev` : Lance le serveur de développement
+- `npm run build` : Compile le projet pour la production
+- `npm run preview` : Prévisualise la version de production
+- `npm run lint` : Vérifie le code avec ESLint
 
 ## Contribution
 
 1. Fork le projet
-2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+2. Créer une branche feature
+3. Commit les changements
+4. Pousser la branche
+5. Créer une Pull Request
+
+## Licence
+
+MIT
